@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -27,7 +27,7 @@ export const BookingSuccessScene: React.FC<BookingSuccessSceneProps> = ({
   /* Stable confirmation reference                                          */
   /* ---------------------------------------------------------------------- */
 
-  const confirmationCode = useMemo(() => {
+  /* const confirmationCode = useMemo(() => {
     const source = `${bookingData?.name || "PRAXX"}-${
       bookingData?.eventType || "EVENT"
     }-${bookingData?.date || "NIGHT"}`;
@@ -39,7 +39,7 @@ export const BookingSuccessScene: React.FC<BookingSuccessSceneProps> = ({
     }
 
     return `PRX-${String(hash % 10000).padStart(4, "0")}-NIGHT`;
-  }, [bookingData]);
+  }, [bookingData]); */
 
   return (
     <motion.section

@@ -1,7 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { preloadImages } from "./utils/preloadImages";
 
-import { type NavDestination, NAV_ITEMS } from "./types/navigation";
+import {
+  type NavDestination,
+  type StoryboardScene,
+  NAV_ITEMS,
+} from "./types/navigation";
+import { HowlerEngine } from "./audio/howlerEngine";
+import { useFullPageScrollHijack } from "./hooks/useFullPageScrollHijack";
 
 import {
   type EventItem,
@@ -114,6 +120,29 @@ function AppContent() {
   const showStageLightNav = !["01_loading", "02_transition"].includes(
     activeScene,
   );
+
+  /**
+   * Full-Page Scroll Hijacking / Presentation Frame-Switching
+   * Fetches current scene from URL dynamically and smoothly transitions to next/prev scene.
+   */
+  const handleScrollSelectScene = useCallback(
+    (scene: StoryboardScene) => {
+      HowlerEngine.triggerLightPulseSound();
+      handleSelectScene(scene);
+    },
+    [handleSelectScene],
+  );
+
+
+
+  useFullPageScrollHijack({
+    activeScene,
+    onSelectScene: handleScrollSelectScene,
+    enabled: showStageLightNav,
+    cooldownMs: 800,
+    wheelThreshold: 25,
+    touchThreshold: 50,
+  });
 
   return (
     <div
