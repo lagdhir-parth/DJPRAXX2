@@ -112,7 +112,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
           {/* 6 Stage Light Navigation Elements */}
 
           <div
-            className="flex items-center justify-center gap-2 sm:gap-4 md:gap-8 lg:gap-11 px-3 py-1.5 rounded-2xl backdrop-blur-md border border-white/5 bg-black/40 shadow-2xl"
+            className="flex items-center justify-center gap-1 sm:gap-5 md:gap56 lg:gap-10 px-2 py-1 rounded-2xl backdrop-blur-md border border-white/5 bg-black/40 shadow-2xl"
             role="tablist"
             aria-orientation="horizontal"
           >
@@ -136,7 +136,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
                   onMouseLeave={() => onHoverNav(null)}
                   onFocus={() => onFocusNav(item.id)}
                   onBlur={() => onFocusNav(null)}
-                  className={`group relative flex flex-col items-center py-2 px-2.5 md:px-3.5 rounded-xl transition-all duration-300  ${
+                  className={`group relative flex flex-col items-center py-1 px-1.5 md:px-2 rounded-xl transition-all duration-300  ${
                     isActive
                       ? "scale-105"
                       : "hover:scale-105 opacity-80 hover:opacity-100"
@@ -147,10 +147,10 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
                   {/* Physical Stage Spotlight */}
 
-                  <div className="relative flex flex-col items-center mb-1">
+                  <div className="relative flex flex-col items-center mb-0.5">
                     <svg
                       viewBox="0 0 64 64"
-                      className={`w-9 h-9 relative z-10 transition-all duration-300 ${
+                      className={`w-7 h-7 relative z-10 transition-all duration-300 ${
                         isActive
                           ? "scale-105"
                           : isHovered || isFocused
@@ -325,7 +325,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
                     {/* Light cone — ONLY active spotlight emits it */}
 
                     <div
-                      className={`absolute top-[27px] pointer-events-none
+                      className={`absolute top-[21px] pointer-events-none
 
       transition-all duration-500
 
@@ -333,9 +333,9 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
     `}
                       style={{
-                        width: "54px",
+                        width: "42px",
 
-                        height: "55px",
+                        height: "43px",
 
                         background: `
 
@@ -366,7 +366,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
                     {/* Hot center of beam */}
 
                     <div
-                      className={`absolute top-[28px] pointer-events-none
+                      className={`absolute top-[22px] pointer-events-none
 
       transition-opacity duration-300
 
@@ -374,9 +374,9 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
     `}
                       style={{
-                        width: "26px",
+                        width: "20px",
 
-                        height: "42px",
+                        height: "33px",
 
                         background: `
 
@@ -404,7 +404,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
                   {/* Navigation Destination Label */}
 
                   <span
-                    className={`text-xs md:text-sm tracking-[0.2em] font-semibold transition-all duration-300 font-['Space_Grotesk'] ${
+                    className={`text-[10px] md:text-xs tracking-[0.15em] font-semibold transition-all duration-300 font-['Space_Grotesk'] ${
                       isActive
                         ? "text-amber-400 drop-shadow-[0_0_8px_rgba(240,124,34,0.8)] font-bold"
                         : isHovered || isFocused
@@ -417,7 +417,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
                   {/* Keyboard Shortcut badge (Desktop) */}
 
-                  <span className="hidden lg:block text-[8px] tracking-wider text-zinc-600 group-hover:text-zinc-400 mt-0.5 font-mono">
+                  <span className="hidden lg:block text-[7px] tracking-wider text-zinc-600 group-hover:text-zinc-400 mt-0.5 font-mono">
                     [{index + 1}]
                   </span>
 
@@ -425,7 +425,7 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
                   {isActive && (
                     <div
-                      className="absolute -bottom-1 w-10 h-1.5 rounded-full bg-amber-500/80 shadow-[0_0_12px_#f07c22]"
+                      className="absolute -bottom-1 w-8 h-1 rounded-full bg-amber-500/80 shadow-[0_0_12px_#f07c22]"
                       style={{ filter: "blur(1px)" }}
                     />
                   )}

@@ -133,8 +133,6 @@ function AppContent() {
     [handleSelectScene],
   );
 
-
-
   useFullPageScrollHijack({
     activeScene,
     onSelectScene: handleScrollSelectScene,
@@ -190,12 +188,12 @@ function AppContent() {
       {showStageLightNav && <AudioHUD />}
 
       {/* Scene Timeline */}
-      {showStageLightNav && (
+      {/* {showStageLightNav && (
         <SceneTimelineScrubber
           currentScene={activeScene}
           onSelectScene={handleSelectScene}
         />
-      )}
+      )} */}
     </div>
   );
 }
