@@ -20,13 +20,18 @@ export const EntranceScene: React.FC<EntranceSceneProps> = ({ onNext }) => {
         w-full
         items-center
         justify-center
-        overflow-hidden
+        overflow-y-auto
+        overflow-x-hidden
+        overscroll-contain
         bg-black/30
         backdrop-blur-xs
         px-4
-        py-24
+        pt-16
+        pb-12
         sm:px-6
+        sm:py-20
         lg:px-8
+        lg:py-24
         z-30
       "
     >
@@ -383,11 +388,11 @@ export const EntranceScene: React.FC<EntranceSceneProps> = ({ onNext }) => {
             className="
               relative
               font-display
-              text-[clamp(4.5rem,15vw,11rem)]
+              text-[clamp(3.2rem,13vw,11rem)]
               font-semibold
               uppercase
-              leading-[0.75]
-              tracking-[-0.055em]
+              leading-[0.8]
+              tracking-[-0.04em]
               text-white
             "
           >

@@ -41,10 +41,10 @@ const MainStageRevealUI: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...slowReveal, delay: 0.35 }}
           >
-            <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter">
+            <span className="block text-[clamp(2.75rem,13vw,8.5rem)] tracking-tighter">
               MAIN
             </span>
-            <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tighter text-primary">
+            <span className="block text-[clamp(2.75rem,13vw,8.5rem)] tracking-tighter text-primary">
               STAGE
             </span>
           </motion.h1>
@@ -61,7 +61,7 @@ const MainStageRevealUI: React.FC = () => {
 
       {/* Advance interaction — bottom right, away from title */}
       <motion.button
-        className="pointer-events-auto absolute bottom-8 right-6 sm:right-10 lg:right-16 font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/60 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
+        className="pointer-events-auto absolute bottom-6 sm:bottom-8 right-6 sm:right-10 lg:right-16 flex items-center min-h-[44px] font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/60 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.7 }}

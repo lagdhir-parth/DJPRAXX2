@@ -20,15 +20,15 @@ const EntranceTunnelUI: React.FC = () => {
 
       {/* Heading — anchored in tunnel shadow, bottom-left */}
       <motion.div
-        className="absolute bottom-28 left-6 sm:left-10 lg:left-16 max-w-xs sm:max-w-md"
+        className="absolute bottom-24 sm:bottom-28 left-6 sm:left-10 lg:left-16 max-w-xs sm:max-w-md pr-4"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...cinematic, delay: 0.2 }}
       >
-        <p className="font-['Space_Grotesk'] text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/50 mb-3">
+        <p className="font-['Space_Grotesk'] text-[10px] sm:text-xs tracking-[0.35em] uppercase text-white/50 mb-2 sm:mb-3">
           Music · People · Moments
         </p>
-        <h1 className="font-['Syne'] text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-none tracking-tight text-white drop-shadow-md">
+        <h1 className="font-['Syne'] text-3xl sm:text-5xl lg:text-6xl font-black uppercase leading-none tracking-tight text-white drop-shadow-md">
           The Night
           <br />
           <span className="text-primary">Starts</span> Here
@@ -37,7 +37,7 @@ const EntranceTunnelUI: React.FC = () => {
 
       {/* Continue interaction */}
       <motion.button
-        className="pointer-events-auto absolute bottom-8 left-6 sm:left-10 lg:left-16 flex items-center gap-2.5 font-['Space_Grotesk'] text-[11px] tracking-[0.28em] uppercase text-white/70 hover:text-primary transition-colors duration-200 cursor-pointer py-2"
+        className="pointer-events-auto absolute bottom-6 sm:bottom-8 left-6 sm:left-10 lg:left-16 flex items-center gap-2.5 font-['Space_Grotesk'] text-[11px] tracking-[0.28em] uppercase text-white/70 hover:text-primary transition-colors duration-200 cursor-pointer min-h-[44px] py-2 px-1"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...cinematic, delay: 0.4 }}

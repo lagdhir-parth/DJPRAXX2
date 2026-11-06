@@ -16,7 +16,6 @@ import {
 
 import { StageLightNav } from "./components/stageNav/StageLightNav";
 import { AudioHUD } from "./components/audio/AudioHUD";
-import { SceneTimelineScrubber } from "./components/navigation/SceneTimelineScrubber";
 
 // import { useResponsiveExperience } from "./components/mobile/hooks/useResponsiveExperience";
 // import { MobileExperience } from "./components/mobile/MobileExperience";
@@ -146,11 +145,11 @@ function AppContent() {
     <div
       className="
       relative
-      min-h-screen
+      min-h-[100dvh]
       w-full
       bg-[#050508]
       text-white
-      overflow-hidden
+      overflow-x-hidden
       selection:bg-amber-500
       selection:text-black
     "

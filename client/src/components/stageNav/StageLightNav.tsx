@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { Menu, X, Radio } from "lucide-react";
 
 import {
   NAV_ITEMS,
@@ -10,35 +11,43 @@ import { HowlerEngine } from "../../audio/howlerEngine";
 
 interface StageLightNavOverlayProps {
   activeNav: NavDestination;
-
   hoveredNav: NavDestination | null;
-
   focusedNav: NavDestination | null;
-
   onHoverNav: (dest: NavDestination | null) => void;
-
   onFocusNav: (dest: NavDestination | null) => void;
-
   onSelectNav: (dest: NavDestination) => void;
 }
 
 export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
   activeNav,
-
   hoveredNav,
-
   focusedNav,
-
   onHoverNav,
-
   onFocusNav,
-
   onSelectNav,
 }) => {
-  // Number shortcuts (1-6) select a navigation destination.
-  // Arrow keys are handled exclusively by SceneTimelineScrubber.
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Body scroll lock only while mobile drawer is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      const originalOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
+    }
+  }, [isMobileMenuOpen]);
+
+  // Escape key closes mobile menu or triggers number shortcuts
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isMobileMenuOpen) {
+        event.preventDefault();
+        setIsMobileMenuOpen(false);
+        return;
+      }
+
       const target = event.target;
       if (
         event.altKey ||
@@ -56,10 +65,11 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
         if (NAV_ITEMS[index]) {
           HowlerEngine.triggerLightPulseSound();
           onSelectNav(NAV_ITEMS[index].id);
+          setIsMobileMenuOpen(false);
         }
       }
     },
-    [onSelectNav],
+    [onSelectNav, isMobileMenuOpen],
   );
 
   useEffect(() => {
@@ -69,8 +79,8 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
 
   const handleItemClick = (item: NavItem) => {
     HowlerEngine.triggerLightPulseSound();
-
     onSelectNav(item.id);
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -103,16 +113,14 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
           </div>
         </div>
 
-        {/* Center: Stage Light Rig & Destination Labels */}
-
+        {/* Center: Stage Light Rig & Destination Labels (Desktop only) */}
         <nav
-          className="pointer-events-auto flex flex-col items-center"
+          className="pointer-events-auto hidden lg:flex flex-col items-center"
           aria-label="Stage Light Rig Navigation"
         >
           {/* 6 Stage Light Navigation Elements */}
-
           <div
-            className="flex items-center justify-center gap-1 sm:gap-5 md:gap56 lg:gap-10 px-2 py-1 rounded-2xl backdrop-blur-md border border-white/5 bg-black/40 shadow-2xl"
+            className="flex items-center justify-center gap-1 sm:gap-5 lg:gap-10 px-2 py-1 rounded-2xl backdrop-blur-md border border-white/5 bg-black/40 shadow-2xl"
             role="tablist"
             aria-orientation="horizontal"
           >
@@ -435,20 +443,150 @@ export const StageLightNav: React.FC<StageLightNavOverlayProps> = ({
           </div>
         </nav>
 
-        {/* Right Rig Slogan - Exactly as Concept 05 */}
-
-        <div className="pointer-events-auto flex flex-col items-end text-right">
+        {/* Right Rig Slogan - Desktop Only */}
+        <div className="pointer-events-auto hidden lg:flex flex-col items-end text-right">
           <span className="text-[10px] md:text-xs tracking-[0.25em] text-zinc-300 font-medium font-['Space_Grotesk'] uppercase">
             A HIGHER STATE
           </span>
-
           <span className="text-[10px] md:text-xs tracking-[0.25em] text-amber-500 font-bold font-['Space_Grotesk'] uppercase">
             TOGETHER
           </span>
-
           <div className="w-6 h-px bg-amber-500/60 mt-1" />
         </div>
+
+        {/* Mobile & Tablet Compact Hamburger Menu Toggle (Top-Right) */}
+        <div className="pointer-events-auto flex lg:hidden items-center">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-navigation-drawer"
+            className="flex items-center justify-center min-w-[44px] min-h-[44px] p-2.5 rounded-xl bg-black/80 border border-white/15 text-zinc-300 hover:text-white hover:border-amber-500/50 backdrop-blur-md shadow-lg transition-all active:scale-95 cursor-pointer"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-5 h-5 text-amber-400" />
+            ) : (
+              <Menu className="w-5 h-5 text-amber-400" />
+            )}
+          </button>
+        </div>
       </div>
+
+      {/* Right-Side Slide-in Drawer Above Content */}
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-navigation-drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Site Navigation"
+          className="fixed inset-0 z-50 pointer-events-auto flex justify-end animate-fadeIn select-none"
+        >
+          {/* Backdrop Overlay */}
+          <div
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+
+          {/* Right-Side Panel */}
+          <aside
+            className="relative z-10 w-[min(340px,86vw)] h-full bg-[#0a0b0f] border-l border-white/10 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto overscroll-contain transition-transform duration-300 ease-out"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Drawer Header */}
+            <div>
+              <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+                <div className="flex flex-col">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] tracking-[0.25em] text-amber-500 font-semibold uppercase">
+                      DJ
+                    </span>
+                    <span className="text-base tracking-[0.3em] font-extrabold text-white font-['Syne']">
+                      PRAXX
+                    </span>
+                  </div>
+                  <span className="text-[9px] tracking-[0.2em] text-zinc-400 font-['Space_Grotesk'] uppercase mt-0.5">
+                    NAVIGATION MENU
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  aria-label="Close navigation menu"
+                  className="flex items-center justify-center min-w-[44px] min-h-[44px] p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Navigation Destinations */}
+              <nav aria-label="Mobile Navigation Destinations">
+                <ul className="flex flex-col gap-2.5">
+                  {NAV_ITEMS.map((item, index) => {
+                    const isActive = activeNav === item.id;
+                    return (
+                      <li key={item.id}>
+                        <button
+                          type="button"
+                          onClick={() => handleItemClick(item)}
+                          className={`w-full flex items-center justify-between p-3.5 rounded-xl border text-left transition-all duration-200 cursor-pointer ${
+                            isActive
+                              ? "bg-amber-500/15 border-amber-500/50 text-white shadow-[0_0_15px_rgba(240,124,34,0.2)]"
+                              : "bg-white/[0.03] border-white/5 text-zinc-300 hover:text-white hover:bg-white/[0.08] hover:border-white/15"
+                          }`}
+                        >
+                          <div className="flex items-center gap-3.5">
+                            <span
+                              className={`flex items-center justify-center w-7 h-7 rounded-lg text-xs font-mono font-bold ${
+                                isActive
+                                  ? "bg-amber-500 text-black font-extrabold"
+                                  : "bg-white/10 text-zinc-400"
+                              }`}
+                            >
+                              0{index + 1}
+                            </span>
+                            <div className="flex flex-col">
+                              <span
+                                className={`text-sm font-bold tracking-[0.2em] font-['Space_Grotesk'] uppercase ${
+                                  isActive ? "text-amber-400" : "text-white"
+                                }`}
+                              >
+                                {item.label}
+                              </span>
+                              <span className="text-[11px] text-zinc-400 font-['Inter']">
+                                {item.subtitle}
+                              </span>
+                            </div>
+                          </div>
+
+                          {isActive && (
+                            <span className="w-2 h-2 rounded-full bg-amber-500 shadow-[0_0_8px_#f07c22] animate-pulse" />
+                          )}
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+            </div>
+
+            {/* Drawer Footer */}
+            <div className="mt-8 pt-4 border-t border-white/10 flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                <Radio className="w-4 h-4 text-amber-500 animate-pulse" />
+                <span className="text-[10px] tracking-[0.25em] text-zinc-400 font-['Space_Grotesk'] uppercase">
+                  LIGHTS • MUSIC • PEOPLE
+                </span>
+              </div>
+              <p className="text-[10px] tracking-[0.2em] text-zinc-500 font-['Space_Grotesk'] uppercase">
+                A HIGHER STATE TOGETHER
+              </p>
+            </div>
+          </aside>
+        </div>
+      )}
     </header>
   );
 };

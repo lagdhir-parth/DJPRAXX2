@@ -41,12 +41,7 @@ interface SceneLayerProps {
   }) => void;
 }
 
-const SceneLayer: React.FC<SceneLayerProps> = (
-  {
-    // selectedEvent,
-    // setSelectedEvent,
-  }: SceneLayerProps,
-) => {
+const SceneLayer: React.FC<SceneLayerProps> = () => {
   const { activeScene, handleSelectScene } = useScene();
   return (
     <main className="relative z-20 w-full min-h-screen flex flex-col justify-center">

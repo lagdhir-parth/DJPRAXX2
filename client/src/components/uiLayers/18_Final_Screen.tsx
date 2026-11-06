@@ -502,7 +502,7 @@ export const FinalScreenScene: React.FC<FinalScreenSceneProps> = ({
     <section
       className="
         relative min-h-svh w-full
-        overflow-hidden 
+        overflow-visible 
         text-white 
         backdrop-blur-xs
       "
@@ -573,8 +573,8 @@ export const FinalScreenScene: React.FC<FinalScreenSceneProps> = ({
           flex min-h-[100svh]
           w-full max-w-[1720px]
           items-center
-          px-5 pb-16 pt-[110px]
-          sm:px-8 sm:pb-20 sm:pt-[120px]
+          px-4 pb-16 pt-12
+          sm:px-8 sm:pb-20 sm:pt-[100px]
           lg:px-12
           xl:px-[clamp(60px,6vw,105px)]
         "

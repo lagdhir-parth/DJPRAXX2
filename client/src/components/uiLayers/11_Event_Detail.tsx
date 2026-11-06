@@ -42,22 +42,22 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
       {/* Back to archive button */}
       <motion.button
-        className="pointer-events-auto absolute top-20 sm:top-24 left-6 sm:left-10 lg:left-16 flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-white/70 hover:text-primary transition-colors duration-200 cursor-pointer py-1"
+        className="pointer-events-auto absolute top-16 sm:top-24 left-4 sm:left-10 lg:left-16 flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-white/70 hover:text-primary transition-colors duration-200 cursor-pointer min-h-[44px] py-2 px-1 z-20"
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ ...cinematic, delay: 0.15 }}
         onClick={() => setActiveScene("10_event_archive")}
         aria-label="Back to event archive"
       >
-        <ArrowLeft className="w-3.5 h-3.5" />
+        <ArrowLeft className="w-4 h-4" />
         <span>Back to Archive</span>
       </motion.button>
 
       {/* Main event content — left-bottom composition */}
-      <div className="absolute bottom-20 sm:bottom-24 left-6 sm:left-10 lg:left-16 max-w-sm sm:max-w-md lg:max-w-lg">
+      <div className="absolute bottom-24 sm:bottom-24 left-4 sm:left-10 lg:left-16 right-4 sm:right-auto max-w-sm sm:max-w-md lg:max-w-lg">
         {/* Category + Date */}
         <motion.div
-          className="flex items-center gap-3 mb-3"
+          className="flex items-center gap-3 mb-2 sm:mb-3"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...cinematic, delay: 0.2 }}
@@ -73,7 +73,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
         {/* Event title */}
         <motion.h1
-          className="font-['Syne'] text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight text-white mb-2 drop-shadow-lg"
+          className="font-['Syne'] text-2xl sm:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight text-white mb-2 drop-shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...cinematic, delay: 0.3 }}
@@ -83,7 +83,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
         {/* Location */}
         <motion.p
-          className="font-['Inter'] text-sm sm:text-base text-white/70 mb-4"
+          className="font-['Inter'] text-xs sm:text-base text-white/70 mb-3 sm:mb-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -93,7 +93,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
         {/* Highlight quote */}
         <motion.p
-          className="font-['Inter'] text-sm sm:text-base text-white/90 leading-relaxed border-l-2 border-primary pl-4 italic drop-shadow-sm mb-4"
+          className="font-['Inter'] text-xs sm:text-base text-white/90 leading-relaxed border-l-2 border-primary pl-3 sm:pl-4 italic drop-shadow-sm mb-3 sm:mb-4"
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ ...cinematic, delay: 0.45 }}
@@ -103,7 +103,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
         {/* Real attendance data */}
         <motion.p
-          className="font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-primary/80"
+          className="font-['Space_Grotesk'] text-[9px] sm:text-[11px] tracking-[0.25em] uppercase text-primary/80"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.55 }}
@@ -114,7 +114,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
 
       {/* Prev / Next navigation — bottom right */}
       <motion.div
-        className="pointer-events-auto absolute bottom-8 right-6 sm:right-10 lg:right-16 flex items-center gap-6"
+        className="pointer-events-auto absolute bottom-6 sm:bottom-8 right-4 sm:right-10 lg:right-16 flex items-center gap-4 sm:gap-6 z-20"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...cinematic, delay: 0.5 }}
@@ -124,7 +124,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
             type="button"
             onClick={() => goTo(prevEvent)}
             aria-label={`Previous event: ${prevEvent.name}`}
-            className="flex items-center gap-1.5 font-['Space_Grotesk'] text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-primary transition-colors duration-200 cursor-pointer"
+            className="flex items-center gap-1.5 font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-primary transition-colors duration-200 cursor-pointer min-h-[44px] py-1"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Prev Event
@@ -138,7 +138,7 @@ const EventDetailUI: React.FC<EventDetailUIProps> = ({
             type="button"
             onClick={() => goTo(nextEvent)}
             aria-label={`Next event: ${nextEvent.name}`}
-            className="flex items-center gap-1.5 font-['Space_Grotesk'] text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-primary transition-colors duration-200 cursor-pointer"
+            className="flex items-center gap-1.5 font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.22em] uppercase text-white/60 hover:text-primary transition-colors duration-200 cursor-pointer min-h-[44px] py-1"
           >
             Next Event
             <ArrowRight className="w-3.5 h-3.5" />

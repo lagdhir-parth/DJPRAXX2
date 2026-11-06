@@ -226,17 +226,18 @@ export const BookingScene: React.FC<BookingSceneProps> = ({ onSuccess }) => {
         relative
         w-full
         min-h-[100dvh]
-        overflow-hidden
+        overflow-visible
 
-        px-4
-        pt-[150px]
-        pb-[105px]
+        px-3
+        pt-16
+        pb-16
 
         sm:px-6
+        sm:pt-20
 
         lg:px-8
-        lg:pt-[145px]
-        lg:pb-[95px]
+        lg:pt-[120px]
+        lg:pb-[80px]
 
         xl:px-10
       "

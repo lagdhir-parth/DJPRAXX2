@@ -36,7 +36,7 @@ const EventRow: React.FC<EventRowProps> = ({
       aria-label={`View ${event.name}`}
     >
       <div
-        className={`relative border-b transition-colors duration-200 py-3.5 sm:py-4.5 flex items-center gap-3 sm:gap-6 ${
+        className={`relative border-b transition-colors duration-200 min-h-[48px] py-3.5 sm:py-4.5 flex items-center gap-2.5 sm:gap-6 ${
           isHovered
             ? "border-primary/50"
             : "border-white/10"
@@ -119,16 +119,16 @@ const EventArchiveUI: React.FC<EventArchiveUIProps> = ({ onSelectEvent }) => {
   };
 
   return (
-    <div className="absolute inset-0 z-30 pointer-events-none select-none flex flex-col backdrop-blur-xs">
+    <div className="absolute inset-0 z-30 pointer-events-none select-none flex flex-col backdrop-blur-xs overflow-y-auto overflow-x-hidden overscroll-contain">
       {/* Top gradient */}
-      <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/80 to-transparent z-10" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/80 to-transparent z-10 pointer-events-none" />
       {/* Bottom gradient */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/80 to-transparent z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/80 to-transparent z-10 pointer-events-none" />
       {/* Left vignette */}
-      <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-black/60 to-transparent" />
+      <div className="absolute inset-y-0 left-0 w-1/3 bg-linear-to-r from-black/60 to-transparent pointer-events-none" />
 
-      {/* Content container — vertically centered in the scene */}
-      <div className="relative z-20 flex flex-col justify-center h-full px-6 sm:px-10 lg:px-16 pt-24 pb-16">
+      {/* Content container — vertically scrollable if viewport is short */}
+      <div className="relative z-20 flex flex-col justify-start sm:justify-center min-h-full px-4 sm:px-10 lg:px-16 pt-20 pb-24 sm:pt-24 sm:pb-16 pointer-events-auto">
         {/* Section heading */}
         <motion.div
           className="mb-6 sm:mb-8"
@@ -183,7 +183,7 @@ const EventArchiveUI: React.FC<EventArchiveUIProps> = ({ onSelectEvent }) => {
 
         {/* Forward nav */}
         <motion.button
-          className="pointer-events-auto mt-8 sm:mt-10 self-start font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/50 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
+          className="pointer-events-auto mt-6 sm:mt-10 self-start flex items-center min-h-[44px] font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/50 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}

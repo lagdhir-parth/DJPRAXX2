@@ -143,7 +143,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
   };
 
   return (
-    <section className="relative flex justify-center items-center min-h-[100svh] w-full overflow-hidden backdrop-blur-xs px-3 pb-8 pt-20 text-white sm:px-5 sm:pb-10 sm:pt-24 lg:px-6">
+    <section className="relative flex justify-center items-center w-full overflow-visible px-3 pb-8 pt-4 sm:pt-6 text-white sm:px-5 sm:pb-10 lg:px-6">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -247,7 +247,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
                         type="button"
                         onClick={() => toggleFavorite(currentTrack.id)}
                         aria-label="Toggle favorite"
-                        className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:border-[#f07c22]/40 hover:bg-[#f07c22]/10"
+                        className="group flex min-h-[44px] min-w-[44px] h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:border-[#f07c22]/40 hover:bg-[#f07c22]/10 cursor-pointer"
                       >
                         <Heart
                           className={`h-4 w-4 transition-all ${
@@ -320,7 +320,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
                         type="button"
                         onClick={() => HowlerEngine.prevTrack()}
                         aria-label="Previous track"
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95"
+                        className="flex min-h-[44px] min-w-[44px] h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95 cursor-pointer"
                       >
                         <SkipBack className="h-4 w-4" />
                       </button>
@@ -329,7 +329,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
                         type="button"
                         onClick={() => HowlerEngine.togglePlay()}
                         aria-label={isPlaying ? "Pause" : "Play"}
-                        className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full bg-[#f07c22] text-black shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_0_28px_rgba(240,124,34,0.34),0_12px_24px_rgba(0,0,0,0.35)] transition hover:scale-[1.04] hover:bg-[#ff8c35] active:scale-95 sm:h-14 sm:w-14"
+                        className="relative flex min-h-[52px] min-w-[52px] h-[52px] w-[52px] items-center justify-center rounded-full bg-[#f07c22] text-black shadow-[0_0_0_1px_rgba(255,255,255,0.18)_inset,0_0_28px_rgba(240,124,34,0.34),0_12px_24px_rgba(0,0,0,0.35)] transition hover:scale-[1.04] hover:bg-[#ff8c35] active:scale-95 sm:h-14 sm:w-14 cursor-pointer"
                       >
                         <span className="absolute -inset-1.5 rounded-full border border-[#f07c22]/20" />
                         {isPlaying ? (
@@ -343,7 +343,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
                         type="button"
                         onClick={() => HowlerEngine.nextTrack()}
                         aria-label="Next track"
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95"
+                        className="flex min-h-[44px] min-w-[44px] h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/55 transition hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/10 hover:text-white active:scale-95 cursor-pointer"
                       >
                         <SkipForward className="h-4 w-4" />
                       </button>
@@ -353,7 +353,7 @@ export const PraxxRadioScene: React.FC<PraxxRadioSceneProps> = ({ onNext }) => {
                           type="button"
                           onClick={() => HowlerEngine.toggleMute()}
                           aria-label={isMuted ? "Unmute" : "Mute"}
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white/45 transition hover:bg-white/5 hover:text-white"
+                          className="flex min-h-[44px] min-w-[44px] h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/45 transition hover:bg-white/5 hover:text-white cursor-pointer"
                         >
                           {isMuted || volume === 0 ? (
                             <VolumeX className="h-4 w-4" />

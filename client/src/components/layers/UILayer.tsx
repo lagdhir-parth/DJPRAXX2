@@ -95,7 +95,7 @@ const UILayer: React.FC<UILayerProps> = ({
         )}
 
         {activeScene === "08_praxx_radio" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <PraxxRadioScene
               onNext={() => setActiveScene("09_sound_universe")}
             />
@@ -103,19 +103,19 @@ const UILayer: React.FC<UILayerProps> = ({
         )}
 
         {activeScene === "09_sound_universe" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <SoundUniverseScene />
           </div>
         )}
 
         {activeScene === "14_artist_profile" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <ArtistProfileScene onNext={() => setActiveScene("15_booking")} />
           </div>
         )}
 
         {activeScene === "15_booking" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <BookingScene
               onSuccess={(data) => {
                 setBookingDetails(data);
@@ -126,7 +126,7 @@ const UILayer: React.FC<UILayerProps> = ({
         )}
 
         {activeScene === "16_booking_success" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <BookingSuccessScene
               bookingData={bookingDetails}
               onNext={() => setActiveScene("17_exit_experience")}
@@ -135,7 +135,7 @@ const UILayer: React.FC<UILayerProps> = ({
         )}
 
         {activeScene === "17_exit_experience" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <ExitExperienceScene
               onNext={() => setActiveScene("18_final_screen")}
             />
@@ -143,7 +143,7 @@ const UILayer: React.FC<UILayerProps> = ({
         )}
 
         {activeScene === "18_final_screen" && (
-          <div className="absolute inset-0 z-30 flex items-center justify-center">
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-start sm:justify-center overflow-y-auto overflow-x-hidden overscroll-contain pt-16 pb-20 sm:py-12">
             <FinalScreenScene onReplay={() => setActiveScene("03_entrance")} />
           </div>
         )}

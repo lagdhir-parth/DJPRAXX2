@@ -19,22 +19,22 @@ const BiographyEntranceUI: React.FC = () => {
       <div className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/50 to-transparent" />
 
       {/* Right-aligned column — personality, intimate editorial tone */}
-      <div className="absolute inset-y-0 right-0 flex flex-col justify-end pb-24 pr-6 sm:pr-10 lg:pr-16 items-end text-right max-w-sm sm:max-w-md ml-auto">
+      <div className="absolute inset-y-0 right-0 flex flex-col justify-end pb-20 sm:pb-24 pr-4 sm:pr-10 lg:pr-16 items-end text-right max-w-sm sm:max-w-md ml-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...cinematic, delay: 0.2 }}
         >
-          <p className="font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.4em] uppercase text-primary mb-3">
+          <p className="font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.4em] uppercase text-primary mb-2 sm:mb-3">
             Behind the Sound
           </p>
-          <h1 className="font-['Syne'] text-4xl sm:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight text-white drop-shadow-lg">
+          <h1 className="font-['Syne'] text-3xl sm:text-5xl lg:text-6xl font-black uppercase leading-tight tracking-tight text-white drop-shadow-lg">
             Beyond
             <br />
             the <span className="text-primary">Booth</span>
           </h1>
           <motion.p
-            className="mt-4 sm:mt-5 font-['Inter'] text-sm sm:text-base text-white/70 leading-relaxed max-w-[280px] ml-auto"
+            className="mt-3 sm:mt-5 font-['Inter'] text-xs sm:text-base text-white/70 leading-relaxed max-w-[280px] ml-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -46,7 +46,7 @@ const BiographyEntranceUI: React.FC = () => {
 
       {/* Continue button — bottom right */}
       <motion.button
-        className="pointer-events-auto absolute bottom-8 right-6 sm:right-10 lg:right-16 flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.28em] uppercase text-white/70 hover:text-primary transition-colors duration-200 group cursor-pointer py-1"
+        className="pointer-events-auto absolute bottom-6 sm:bottom-8 right-4 sm:right-10 lg:right-16 flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.28em] uppercase text-white/70 hover:text-primary transition-colors duration-200 group cursor-pointer min-h-[44px] py-2 px-1"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.55 }}

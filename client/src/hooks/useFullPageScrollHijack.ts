@@ -51,8 +51,8 @@ export function getSceneIdFromURL(): StoryboardScene | null {
 }
 
 /**
- * Checks if an event target or any of its parents is a scrollable container
- * that still has scrollable distance in the direction the user is scrolling.
+ * Checks if an event target or any of its parents is a scrollable container,
+ * interactive control, form element, modal, or drawer.
  */
 function isInsideScrollableElement(
   target: EventTarget | null,
@@ -60,10 +60,19 @@ function isInsideScrollableElement(
 ): boolean {
   if (!(target instanceof HTMLElement)) return false;
 
-  // Always ignore form fields, buttons, interactive controls
+  // Never hijack if inside mobile navigation drawer, dialog, or modal
   if (
     target.closest(
-      'input, textarea, select, [contenteditable="true"], [role="slider"], [role="textbox"]',
+      '#mobile-navigation-drawer, [role="dialog"], [aria-modal="true"], [role="menu"]',
+    )
+  ) {
+    return true;
+  }
+
+  // Always ignore form fields, buttons, interactive controls, audio controls
+  if (
+    target.closest(
+      'input, textarea, select, button, [contenteditable="true"], [role="slider"], [role="textbox"], audio, video, label',
     )
   ) {
     return true;
@@ -78,20 +87,25 @@ function isInsideScrollableElement(
   ) {
     const style = window.getComputedStyle(element);
     const overflowY = style.overflowY;
-    const isScrollable =
-      (overflowY === "auto" || overflowY === "scroll") &&
-      element.scrollHeight > element.clientHeight;
+    const isScrollContainer =
+      overflowY === "auto" || overflowY === "scroll" || overflowY === "overlay";
 
-    if (isScrollable) {
-      const atTop = element.scrollTop <= 1;
+    if (isScrollContainer && element.scrollHeight > element.clientHeight + 4) {
+      const atTop = element.scrollTop <= 2;
       const atBottom =
         Math.ceil(element.scrollTop + element.clientHeight) >=
-        element.scrollHeight - 1;
+        element.scrollHeight - 2;
 
+      // If scrolling down and not yet at bottom of element, stay inside
       if (deltaY > 0 && !atBottom) {
         return true;
       }
+      // If scrolling up and not yet at top of element, stay inside
       if (deltaY < 0 && !atTop) {
+        return true;
+      }
+      // On touch devices, keep touch scroll contained
+      if (window.matchMedia("(pointer: coarse)").matches) {
         return true;
       }
     }
@@ -130,6 +144,7 @@ export function useFullPageScrollHijack({
 }: FullPageScrollHijackOptions) {
   const isLockedRef = useRef(false);
   const touchStartYRef = useRef<number | null>(null);
+  const touchStartTargetRef = useRef<EventTarget | null>(null);
   const accumulatedDeltaRef = useRef(0);
   const resetDeltaTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -139,10 +154,12 @@ export function useFullPageScrollHijack({
 
   // Keep latest values in refs to prevent any stale closures
   const activeSceneRef = useRef(activeScene);
-  activeSceneRef.current = activeScene;
-
   const onSelectSceneRef = useRef(onSelectScene);
-  onSelectSceneRef.current = onSelectScene;
+
+  useEffect(() => {
+    activeSceneRef.current = activeScene;
+    onSelectSceneRef.current = onSelectScene;
+  }, [activeScene, onSelectScene]);
 
   const navigateScene = (
     direction: "next" | "prev",
@@ -217,6 +234,11 @@ export function useFullPageScrollHijack({
      * Mouse Wheel / Trackpad
      */
     const handleWheel = (event: WheelEvent) => {
+      // Never hijack if body scroll is locked (e.g. mobile drawer open)
+      if (document.body.style.overflow === "hidden") {
+        return;
+      }
+
       lastWheelTimeRef.current = Date.now();
 
       if (isInsideScrollableElement(event.target, event.deltaY)) {
@@ -254,20 +276,41 @@ export function useFullPageScrollHijack({
      * Touch Gestures (Mobile / Tablets)
      */
     const handleTouchStart = (event: TouchEvent) => {
+      // Never hijack if body scroll is locked (e.g. mobile drawer open)
+      if (document.body.style.overflow === "hidden") {
+        touchStartYRef.current = null;
+        touchStartTargetRef.current = null;
+        return;
+      }
+
       if (event.touches.length === 1) {
         touchStartYRef.current = event.touches[0].clientY;
+        touchStartTargetRef.current = event.target;
       }
     };
 
     const handleTouchEnd = (event: TouchEvent) => {
+      if (document.body.style.overflow === "hidden") {
+        touchStartYRef.current = null;
+        touchStartTargetRef.current = null;
+        return;
+      }
+
       if (touchStartYRef.current === null) return;
       const endY = event.changedTouches[0]?.clientY;
+      const startTarget = touchStartTargetRef.current;
+      touchStartTargetRef.current = null;
+
       if (endY === undefined) return;
 
       const deltaY = touchStartYRef.current - endY;
       touchStartYRef.current = null;
 
-      if (isInsideScrollableElement(event.target, deltaY)) {
+      // Check both touch start target and touch end target
+      if (
+        isInsideScrollableElement(startTarget, deltaY) ||
+        isInsideScrollableElement(event.target, deltaY)
+      ) {
         return;
       }
 

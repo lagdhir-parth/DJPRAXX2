@@ -396,13 +396,13 @@ export const SoundUniverseScene: React.FC = () => {
 
             max-w-[780px]
 
-            min-h-[340px]
+            min-h-[260px]
 
-            sm:min-h-[420px]
+            sm:min-h-[380px]
 
             overflow-hidden
 
-            rounded-[40px]
+            rounded-[28px] sm:rounded-[40px]
 
             border border-white/[0.06]
 

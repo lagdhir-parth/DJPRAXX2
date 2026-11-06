@@ -51,11 +51,12 @@ export const BookingSuccessScene: React.FC<BookingSuccessSceneProps> = ({
         relative
         min-h-[100dvh]
         w-full
-        overflow-hidden
-        px-4
-        pt-[145px]
-        pb-[110px]
+        overflow-visible
+        px-3
+        pt-16
+        pb-16
         sm:px-6
+        sm:pt-20
         lg:px-8
       "
     >

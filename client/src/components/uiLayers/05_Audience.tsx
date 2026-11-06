@@ -22,18 +22,18 @@ const AudienceUI: React.FC = () => {
 
       {/* Main statement — left column, gives crowd/stage the center/right */}
       <motion.div
-        className="absolute bottom-24 left-6 sm:left-10 lg:left-16 max-w-[280px] sm:max-w-xs lg:max-w-sm"
+        className="absolute bottom-20 sm:bottom-24 left-6 sm:left-10 lg:left-16 max-w-[280px] sm:max-w-xs lg:max-w-sm pr-4"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ ...cinematic, delay: 0.2 }}
       >
-        <h1 className="font-['Syne'] text-3xl sm:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight text-white drop-shadow-md">
+        <h1 className="font-['Syne'] text-2xl sm:text-4xl lg:text-5xl font-black uppercase leading-tight tracking-tight text-white drop-shadow-md">
           One Room.
           <br />
           One <span className="text-primary">Frequency.</span>
         </h1>
         <motion.p
-          className="mt-4 font-['Inter'] text-sm sm:text-base text-white/70 leading-relaxed max-w-[240px]"
+          className="mt-3 sm:mt-4 font-['Inter'] text-sm sm:text-base text-white/70 leading-relaxed max-w-[240px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -44,7 +44,7 @@ const AudienceUI: React.FC = () => {
 
       {/* Forward nudge — minimal text interaction */}
       <motion.button
-        className="pointer-events-auto absolute bottom-8 left-6 sm:left-10 lg:left-16 font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/60 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
+        className="pointer-events-auto absolute bottom-6 sm:bottom-8 left-6 sm:left-10 lg:left-16 flex items-center min-h-[44px] font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase text-white/60 hover:text-primary transition-colors duration-200 border-b border-white/20 hover:border-primary/50 pb-1 cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.5 }}

@@ -43,14 +43,14 @@ const BiographyChapterUI: React.FC = () => {
   const activeChapter = BIOGRAPHY_CHAPTERS[activeChapterIndex];
 
   return (
-    <div className="absolute inset-0 z-30 pointer-events-none select-none flex flex-col">
+    <div className="absolute inset-0 z-30 pointer-events-none select-none flex flex-col overflow-y-auto overflow-x-hidden overscroll-contain">
       {/* Background vignettes — text on left, vinyl visual preserved on right */}
-      <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-linear-to-r from-black/90 via-black/60 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/80 to-transparent" />
-      <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/80 to-transparent" />
+      <div className="absolute inset-y-0 left-0 w-full sm:w-2/3 lg:w-1/2 bg-linear-to-r from-black/90 via-black/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-40 bg-linear-to-t from-black/80 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/80 to-transparent pointer-events-none" />
 
       {/* Main content container */}
-      <div className="relative z-20 flex-1 flex flex-col justify-center px-6 sm:px-10 lg:px-16 pt-28 sm:pt-32 pb-20 max-w-xl lg:max-w-2xl">
+      <div className="relative z-20 flex-1 flex flex-col justify-start sm:justify-center px-4 sm:px-10 lg:px-16 pt-20 sm:pt-32 pb-20 max-w-xl lg:max-w-2xl pointer-events-auto">
         {/* Section title */}
         <motion.p
           className="font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.45em] uppercase text-primary font-semibold mb-3"
@@ -63,7 +63,7 @@ const BiographyChapterUI: React.FC = () => {
 
         {/* Chapter selector tabs */}
         <motion.div
-          className="pointer-events-auto flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
+          className="pointer-events-auto flex flex-wrap items-center gap-2 sm:gap-4 mb-5 sm:mb-8"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...cinematic, delay: 0.2 }}
@@ -73,7 +73,7 @@ const BiographyChapterUI: React.FC = () => {
               key={ch.id}
               type="button"
               onClick={() => setActiveChapterIndex(idx)}
-              className={`flex items-center gap-2 py-1.5 px-3 rounded-md border text-left transition-all duration-200 cursor-pointer ${
+              className={`flex items-center gap-2 min-h-[44px] py-1.5 px-3.5 rounded-md border text-left transition-all duration-200 cursor-pointer ${
                 activeChapterIndex === idx
                   ? "border-primary/50 bg-primary/10 text-white"
                   : "border-white/10 bg-black/20 text-white/40 hover:text-white/70 hover:border-white/20"
@@ -82,7 +82,7 @@ const BiographyChapterUI: React.FC = () => {
               <span className="font-['Space_Grotesk'] text-[11px] font-bold tabular-nums text-primary">
                 {ch.number}
               </span>
-              <span className="hidden sm:inline font-['Space_Grotesk'] text-[10px] tracking-wider uppercase">
+              <span className="inline font-['Space_Grotesk'] text-[10px] tracking-wider uppercase">
                 {ch.tagline}
               </span>
             </button>
@@ -102,13 +102,13 @@ const BiographyChapterUI: React.FC = () => {
               {activeChapter.heading}
             </h2>
 
-            <div className="w-10 h-0.5 bg-primary/60 mb-5" />
+            <div className="w-10 h-0.5 bg-primary/60 mb-4 sm:mb-5" />
 
-            <p className="font-['Inter'] text-sm sm:text-base text-white/80 leading-relaxed mb-4">
+            <p className="font-['Inter'] text-xs sm:text-base text-white/80 leading-relaxed mb-4">
               {activeChapter.body}
             </p>
 
-            <p className="font-['Space_Grotesk'] text-[11px] tracking-[0.2em] uppercase text-primary/70">
+            <p className="font-['Space_Grotesk'] text-[10px] sm:text-[11px] tracking-[0.2em] uppercase text-primary/70">
               {activeChapter.detail}
             </p>
           </motion.div>
@@ -116,7 +116,7 @@ const BiographyChapterUI: React.FC = () => {
 
         {/* Navigation buttons */}
         <motion.div
-          className="pointer-events-auto flex items-center gap-6 mt-8 sm:mt-10"
+          className="pointer-events-auto flex flex-wrap items-center gap-4 sm:gap-6 mt-6 sm:mt-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -125,7 +125,7 @@ const BiographyChapterUI: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveChapterIndex(activeChapterIndex + 1)}
-              className="flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-white/60 hover:text-white transition-colors duration-200 cursor-pointer"
+              className="flex items-center gap-2 min-h-[44px] font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-white/60 hover:text-white transition-colors duration-200 cursor-pointer"
             >
               <span>Next Chapter</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -134,7 +134,7 @@ const BiographyChapterUI: React.FC = () => {
             <button
               type="button"
               onClick={() => handleSelectScene("14_artist_profile")}
-              className="flex items-center gap-2 font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-primary hover:text-orange-400 transition-colors duration-200 cursor-pointer border-b border-primary/40 pb-1"
+              className="flex items-center gap-2 min-h-[44px] font-['Space_Grotesk'] text-[11px] tracking-[0.25em] uppercase text-primary hover:text-orange-400 transition-colors duration-200 cursor-pointer border-b border-primary/40 pb-1"
             >
               <span>View Artist Profile</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -145,7 +145,7 @@ const BiographyChapterUI: React.FC = () => {
             <button
               type="button"
               onClick={() => handleSelectScene("14_artist_profile")}
-              className="font-['Space_Grotesk'] text-[10px] tracking-[0.25em] uppercase text-white/30 hover:text-white/60 transition-colors duration-200 cursor-pointer ml-auto"
+              className="flex items-center min-h-[44px] font-['Space_Grotesk'] text-[10px] tracking-[0.25em] uppercase text-white/30 hover:text-white/60 transition-colors duration-200 cursor-pointer ml-auto"
             >
               Skip to Profile →
             </button>

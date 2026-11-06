@@ -24,13 +24,18 @@ export const ExitExperienceScene: React.FC<ExitExperienceSceneProps> = ({
         w-full
         items-center
         justify-center
-        overflow-hidden
+        overflow-y-auto
+        overflow-x-hidden
+        overscroll-contain
         bg-black/30
         backdrop-blur-xs
         px-4
-        py-24
+        pt-16
+        pb-12
         sm:px-6
+        sm:py-20
         lg:px-8
+        lg:py-24
       "
     >
       {/* ===================================================== */}
